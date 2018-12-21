@@ -6,7 +6,6 @@
 package com.fitn.app.ws.io.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -154,8 +153,7 @@ public class UserEntity implements Serializable {
     /**
      * @param accountNumber the accountNumber to set
      */
-    public void setAccountNumber(String accountNumber){
-        
+    public void setAccountNumber(String accountNumber){ 
         this.accountNumber = accountNumber;
     }
 

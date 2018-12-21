@@ -51,6 +51,7 @@ public class UsersEntryPoint {
         
         //Prepare response
         BeanUtils.copyProperties(createdUserProfile, responseObject);
+        
         return responseObject;
     }
     

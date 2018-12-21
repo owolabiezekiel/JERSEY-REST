@@ -18,7 +18,7 @@ public class UserProfileResponse {
     private String lastName;
     private String email;
     private String href;
-    private String accountNumberString;
+    private String accountNumber;
 
     /**
      * @return the userId
@@ -93,14 +93,14 @@ public class UserProfileResponse {
     /**
      * @return the accountNumberString
      */
-    public String getAccountNumberString() {
-        return accountNumberString;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
     /**
-     * @param accountNumberString the accountNumberString to set
+     * @param accountNumber the accountNumberto set
      */
-    public void setAccountNumberString(String accountNumberString) {
-        this.accountNumberString = accountNumberString;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }
