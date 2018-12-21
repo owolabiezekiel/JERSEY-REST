@@ -21,5 +21,5 @@ public interface DAO {
     void deleteUser(UserDTO userProfile);
     void closeConnection();
     List<UserDTO> getUsers(int start, int limit);
-    
+    long getLastID();    
 }

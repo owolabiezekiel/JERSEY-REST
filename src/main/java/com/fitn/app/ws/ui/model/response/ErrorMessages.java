@@ -16,7 +16,8 @@ public enum ErrorMessages {
     NO_RECORD_FOUND("No record found for this User"),
     AUTHENTICATION_FAILED("Authentictation failed"),
     COULD_NOT_UPDATE_RECORD("Failed to update record..."),
-    COULD_NOT_DELETE_RECORD("Failed to delete record...");
+    COULD_NOT_DELETE_RECORD("Failed to delete record..."),
+    COULD_NOT_CONNECT_TO_DATABASE("Failed to establish database connection");
     
     private String errorMessage;
     

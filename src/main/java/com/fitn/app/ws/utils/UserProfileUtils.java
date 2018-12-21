@@ -6,6 +6,8 @@
 package com.fitn.app.ws.utils;
 
 import com.fitn.app.ws.exceptions.MissingRequiredFieldException;
+import com.fitn.app.ws.io.dao.DAO;
+import com.fitn.app.ws.io.dao.impl.MySQLDAO;
 import com.fitn.app.ws.shared.dto.UserDTO;
 import com.fitn.app.ws.ui.model.response.ErrorMessages;
 import java.security.NoSuchAlgorithmException;
@@ -83,5 +85,19 @@ public class UserProfileUtils {
     
     public byte[] encrypt(String securePassword, String accessTokenMaterial) throws InvalidKeySpecException {
         return hash(securePassword.toCharArray(), accessTokenMaterial.getBytes());
+    }
+    
+    public String generateAccountNumber(){
+        String accountNumber = "";
+        DAO dao = new MySQLDAO();
+        long lastId = dao.getLastID();
+        String lastIDString = lastId+"";
+        int lastIDStringLength = lastIDString.length();
+        for(int i = 10; i > lastIDStringLength; i--){
+            accountNumber += "0";
+        }
+        accountNumber += lastIDString;
+        return accountNumber;
+        
     }
 }

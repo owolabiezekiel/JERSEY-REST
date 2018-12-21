@@ -5,6 +5,7 @@
  */
 package com.fitn.app.ws.service.impl;
 
+import com.fitn.app.ws.exceptions.CouldNotConnectToDatabaseException;
 import com.fitn.app.ws.exceptions.CouldNotCreateRecordException;
 import com.fitn.app.ws.exceptions.CouldNotDeleteRecordException;
 import com.fitn.app.ws.exceptions.CouldNotUpdateRecordException;
@@ -49,8 +50,14 @@ public class UsersServiceImpl implements UsersService{
         
         //Generate secure password
         String encryptedPassword = userProfileUtils.generateSecurePassword(user.getPassword(), salt);
+        
+        //Generate account number
+        
+        
+        
         user.setSalt(salt);
         user.setEncryptedPassword(encryptedPassword);
+        
         
         //Record data into database
         returnValue = this.saveUser(user);
@@ -83,6 +90,8 @@ public class UsersServiceImpl implements UsersService{
         //connect to the database
         try{
             this.database.openConnection();
+            String accountNumber = userProfileUtils.generateAccountNumber();
+            user.setAccountNumber(accountNumber);
             returnValue = this.database.saveUser(user);
         } finally{
             this.database.closeConnection();

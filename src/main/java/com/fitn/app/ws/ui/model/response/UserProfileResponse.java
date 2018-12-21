@@ -18,6 +18,7 @@ public class UserProfileResponse {
     private String lastName;
     private String email;
     private String href;
+    private String accountNumberString;
 
     /**
      * @return the userId
@@ -87,5 +88,19 @@ public class UserProfileResponse {
      */
     public void setHref(String href) {
         this.href = href;
+    }
+
+    /**
+     * @return the accountNumberString
+     */
+    public String getAccountNumberString() {
+        return accountNumberString;
+    }
+
+    /**
+     * @param accountNumberString the accountNumberString to set
+     */
+    public void setAccountNumberString(String accountNumberString) {
+        this.accountNumberString = accountNumberString;
     }
 }

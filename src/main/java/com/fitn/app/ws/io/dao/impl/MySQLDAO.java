@@ -84,7 +84,8 @@ public class MySQLDAO implements DAO {
             session.close();
         }
     }
-
+    
+    @Override
     public UserDTO saveUser(UserDTO user) {
         UserDTO returnValue = null;
         UserEntity userEntity = new UserEntity();
@@ -111,7 +112,9 @@ public class MySQLDAO implements DAO {
 
     @Override
     public List<UserDTO> getUsers(int start, int limit) {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
+        SessionFactory sessionFactoryLocal = HibernateUtils.getSessionFactory();
+        Session sessionLocal = sessionFactoryLocal.openSession();
+        CriteriaBuilder cb = sessionLocal.getCriteriaBuilder();
 
         //Create Criteria against a particular persistent class
         CriteriaQuery<UserEntity> criteria = cb.createQuery(UserEntity.class);
@@ -121,7 +124,7 @@ public class MySQLDAO implements DAO {
         criteria.select(userRoot);
 
         // Fetch results from start to a number of "limit"
-        List<UserEntity> searchResults = session.createQuery(criteria).
+        List<UserEntity> searchResults = sessionLocal.createQuery(criteria).
                 setFirstResult(start).
                 setMaxResults(limit).
                 getResultList();
@@ -144,6 +147,21 @@ public class MySQLDAO implements DAO {
         session.beginTransaction();
         session.delete(userEntity);
         session.getTransaction().commit();
+    }
+
+    @Override
+    public long getLastID() {
+        List<UserDTO> users = this.getUsers(0, 1000000000);
+        int size = users.size();
+        if (size == 0){
+            return 1;
+        }
+        else {
+            UserDTO lastUser = users.get(size - 1);
+            long lastID = lastUser.getId();
+            return  lastID + 1; 
+        }
+             
     }
 
 }

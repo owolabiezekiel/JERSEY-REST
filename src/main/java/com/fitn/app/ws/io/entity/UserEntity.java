@@ -30,9 +30,7 @@ public class UserEntity implements Serializable {
     private String salt;
     private String encryptedPassword;
     private String token;
-    //private String emailVerificationToken;
-    //@Column(nullable = false, columnDefinition = "boolean default false")
-    //private Boolean emailVerificationStatus;
+    private String accountNumber;
 
     /**
      * @return the id
@@ -145,34 +143,21 @@ public class UserEntity implements Serializable {
     public void setToken(String token) {
         this.token = token;
     }
-
+    
     /**
-     * @return the emailVerificationToken
+     * @return the account number
      */
-   // public String getEmailVerificationToken() {
-   //     return emailVerificationToken;
-   // }
-
+    public String getAccountNumber(){
+        return accountNumber;
+    }
+    
     /**
-     * @param emailVerificationToken the emailVerificationToken to set
+     * @param accountNumber the accountNumber to set
      */
-   // public void setEmailVerificationToken(String emailVerificationToken) {
-     //   this.emailVerificationToken = emailVerificationToken;
-    //}
-
-    /**
-     * @return the emailVerificationStatus
-     */
-   // public Boolean getEmailVerificationStatus() {
-   //     return emailVerificationStatus;
-   // }
-
-    /**
-     * @param emailVerificationStatus the emailVerificationStatus to set
-     */
-    //public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
-   //     this.emailVerificationStatus = emailVerificationStatus;
-    //}
+    public void setAccountNumber(String accountNumber){
+        
+        this.accountNumber = accountNumber;
+    }
 
 
 }

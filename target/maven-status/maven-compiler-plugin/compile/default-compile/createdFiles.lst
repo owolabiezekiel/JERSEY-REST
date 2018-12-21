@@ -12,7 +12,9 @@ com\fitn\app\ws\io\entity\UserEntity.class
 com\fitn\app\ws\exceptions\NoRecordFoundException.class
 com\fitn\app\ws\exceptions\CouldNotCreateRecordException.class
 com\fitn\app\ws\shared\dto\UserDTO.class
+com\fitn\app\ws\exceptions\CouldNotConnectToDatabaseException.class
 com\fitn\app\ws\ui\model\response\ErrorMessage.class
+com\fitn\app\ws\exceptions\CouldNotConnectToDatabaseExceptionMapper.class
 com\fitn\app\ws\exceptions\CouldNotUpdateRecordExceptionMapper.class
 com\fitn\app\ws\exceptions\CouldNotCreateRecordExceptionMapper.class
 com\fitn\app\ws\ui\model\request\UpdateUserRequestModel.class
