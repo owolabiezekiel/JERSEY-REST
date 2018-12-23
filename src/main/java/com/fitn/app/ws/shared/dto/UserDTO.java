@@ -23,6 +23,7 @@ public class UserDTO implements Serializable {
     private String userId;
     private String token;
     private String accountNumber;
+    private Double accountBalance;
 
     /**
      * @return the id
@@ -162,5 +163,19 @@ public class UserDTO implements Serializable {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    /**
+     * @return the accountBalance
+     */
+    public Double getAccountBalance() {
+        return accountBalance;
+    }
+
+    /**
+     * @param accountBalance the accountBalance to set
+     */
+    public void setAccountBalance(Double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

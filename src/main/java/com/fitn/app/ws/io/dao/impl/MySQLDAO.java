@@ -6,7 +6,9 @@
 package com.fitn.app.ws.io.dao.impl;
 
 import com.fitn.app.ws.io.dao.DAO;
+import com.fitn.app.ws.io.entity.TransactionEntity;
 import com.fitn.app.ws.io.entity.UserEntity;
+import com.fitn.app.ws.shared.dto.TransactionDTO;
 import com.fitn.app.ws.shared.dto.UserDTO;
 import com.fitn.app.ws.utils.HibernateUtils;
 import java.util.ArrayList;
@@ -44,6 +46,30 @@ public class MySQLDAO implements DAO {
         Root<UserEntity> profileRoot = criteria.from(UserEntity.class);
         criteria.select(profileRoot);
         criteria.where(cb.equal(profileRoot.get("email"), userName));
+
+        // Fetch single result
+        Query<UserEntity> query = session.createQuery(criteria);
+        List<UserEntity> resultList = query.getResultList();
+        if (resultList != null && resultList.size() > 0) {
+            UserEntity userEntity = resultList.get(0);
+            userDTO = new UserDTO();
+            BeanUtils.copyProperties(userEntity, userDTO);
+        }
+
+        return userDTO;
+    }
+    
+    @Override
+    public UserDTO getUserByAccountNumber(String accountNumber) {
+        UserDTO userDTO = null;
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        //Create Criteria against a particular persistent class
+        CriteriaQuery<UserEntity> criteria = cb.createQuery(UserEntity.class);
+
+        //Query roots always reference entitie
+        Root<UserEntity> profileRoot = criteria.from(UserEntity.class);
+        criteria.select(profileRoot);
+        criteria.where(cb.equal(profileRoot.get("accountNumber"), accountNumber));
 
         // Fetch single result
         Query<UserEntity> query = session.createQuery(criteria);
@@ -163,5 +189,86 @@ public class MySQLDAO implements DAO {
         }
              
     }
+
+    @Override
+    public TransactionDTO saveTransaction(TransactionDTO transaction) {
+        TransactionDTO returnValue = null;
+        TransactionEntity transactionEntity = new TransactionEntity();
+        BeanUtils.copyProperties(transaction, transactionEntity);
+        
+        session.beginTransaction();
+        session.save(transactionEntity);
+        session.getTransaction().commit();
+        
+        returnValue = new TransactionDTO();
+        BeanUtils.copyProperties(transactionEntity, returnValue);
+        return returnValue;
+    }
+
+    @Override
+    public List<TransactionDTO> getTransactions() {
+        SessionFactory sessionFactoryLocal = HibernateUtils.getSessionFactory();
+        Session sessionLocal = sessionFactoryLocal.openSession();
+        CriteriaBuilder cb = sessionLocal.getCriteriaBuilder();
+        
+        CriteriaQuery<TransactionEntity> criteria = cb.createQuery(TransactionEntity.class);
+         
+        Root<TransactionEntity> transactionRoot = criteria.from(TransactionEntity.class);
+        criteria.select(transactionRoot);
+        
+        List<TransactionEntity> searchResults = sessionLocal.createQuery(criteria).getResultList();
+        
+        
+        List<TransactionDTO> returnValue = new ArrayList<TransactionDTO>();
+        for (TransactionEntity transactionEntity : searchResults) {
+            TransactionDTO transactionDTO = new TransactionDTO();
+            BeanUtils.copyProperties(transactionEntity, transactionDTO);
+            returnValue.add(transactionDTO);
+        }
+
+        return returnValue;
+    }
+
+    @Override
+    public List<TransactionDTO> getTransactionByAccountNumber(String accnumber) {
+        List<TransactionDTO> transactionDTOs = new ArrayList<>();
+        
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<TransactionEntity> criteria = cb.createQuery(TransactionEntity.class);      
+        Root<TransactionEntity> profileRoot = criteria.from(TransactionEntity.class);
+        criteria.select(profileRoot);
+        criteria.where(cb.equal(profileRoot.get("fromAccount"), accnumber));
+
+        Query<TransactionEntity> query = session.createQuery(criteria);
+        List<TransactionEntity> resultList = query.getResultList();
+        if (resultList != null) {
+            for (TransactionEntity transactionEntity : resultList) {
+                TransactionDTO transactionDTO = new TransactionDTO();
+                BeanUtils.copyProperties(transactionEntity, transactionDTO);
+                transactionDTOs.add(transactionDTO);
+            }
+        }
+        
+        criteria.select(profileRoot);
+        criteria.where(cb.equal(profileRoot.get("toAccount"), accnumber));
+
+        query = session.createQuery(criteria);
+        resultList = query.getResultList();
+        if (resultList != null) {
+            for (TransactionEntity transactionEntity : resultList) {
+                TransactionDTO transactionDTO = new TransactionDTO();
+                BeanUtils.copyProperties(transactionEntity, transactionDTO);
+                transactionDTOs.add(transactionDTO);
+            }
+        }
+        
+        return transactionDTOs;
+        
+    }
+
+    
+    
+    
+    
 
 }

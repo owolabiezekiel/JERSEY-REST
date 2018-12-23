@@ -16,6 +16,7 @@ public interface UsersService {
     UserDTO createUser(UserDTO user);
     UserDTO getUser(String id);
     UserDTO getUserByUserName(String username);
+    UserDTO getUserByAccountNumber(String accnumber);
     List<UserDTO> getUsers(int start, int limit);
     void updateUserDetails(UserDTO userDetails);
     void deleteUser(UserDTO storedUser);

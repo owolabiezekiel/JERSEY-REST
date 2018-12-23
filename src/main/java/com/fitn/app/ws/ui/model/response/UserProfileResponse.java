@@ -19,6 +19,7 @@ public class UserProfileResponse {
     private String email;
     private String href;
     private String accountNumber;
+    private Double accountBalance;
 
     /**
      * @return the userId
@@ -102,5 +103,19 @@ public class UserProfileResponse {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    /**
+     * @return the accountBalance
+     */
+    public Double getAccountBalance() {
+        return accountBalance;
+    }
+
+    /**
+     * @param accountBalance the accountBalance to set
+     */
+    public void setAccountBalance(Double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

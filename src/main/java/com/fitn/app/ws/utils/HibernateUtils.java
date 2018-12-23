@@ -22,7 +22,7 @@ public class HibernateUtils {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (HibernateException e) {
-            System.err.println("Initial SessionFactory creation failded" + e);
+            System.err.println("Initial SessionFactory creation failed" + e);
             throw new ExceptionInInitializerError(e);
         }
     }

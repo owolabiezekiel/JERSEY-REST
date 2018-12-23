@@ -30,6 +30,7 @@ public class UserEntity implements Serializable {
     private String encryptedPassword;
     private String token;
     private String accountNumber;
+    private Double accountBalance;
 
     /**
      * @return the id
@@ -155,6 +156,20 @@ public class UserEntity implements Serializable {
      */
     public void setAccountNumber(String accountNumber){ 
         this.accountNumber = accountNumber;
+    }
+
+    /**
+     * @return the accountBalance
+     */
+    public Double getAccountBalance() {
+        return accountBalance;
+    }
+
+    /**
+     * @param accountBalance the accountBalance to set
+     */
+    public void setAccountBalance(Double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
 

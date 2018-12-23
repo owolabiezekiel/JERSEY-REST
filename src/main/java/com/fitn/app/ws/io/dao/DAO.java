@@ -5,6 +5,7 @@
  */
 package com.fitn.app.ws.io.dao;
 
+import com.fitn.app.ws.shared.dto.TransactionDTO;
 import com.fitn.app.ws.shared.dto.UserDTO;
 import java.util.List;
 
@@ -15,11 +16,15 @@ import java.util.List;
 public interface DAO {
     void openConnection();
     UserDTO getUserByUsername(String userName);
+    UserDTO getUserByAccountNumber(String accountNumber);
     UserDTO getUser(String id);
     UserDTO saveUser(UserDTO user);
     void updateUser(UserDTO userProfile);
     void deleteUser(UserDTO userProfile);
     void closeConnection();
     List<UserDTO> getUsers(int start, int limit);
-    long getLastID();    
+    long getLastID();
+    TransactionDTO saveTransaction(TransactionDTO transaction);
+    List<TransactionDTO> getTransactions();
+    List<TransactionDTO> getTransactionByAccountNumber(String accnumber);
 }

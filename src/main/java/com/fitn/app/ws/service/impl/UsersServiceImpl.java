@@ -57,6 +57,7 @@ public class UsersServiceImpl implements UsersService{
         
         user.setSalt(salt);
         user.setEncryptedPassword(encryptedPassword);
+        user.setAccountBalance(50000.00);
         
         
         //Record data into database
@@ -162,6 +163,23 @@ public class UsersServiceImpl implements UsersService{
         if (storedUser != null){
             throw new CouldNotDeleteRecordException(ErrorMessages.COULD_NOT_DELETE_RECORD.getErrorMessage());
         }
+    }
+
+    @Override
+    public UserDTO getUserByAccountNumber(String accnumber) {
+        UserDTO userDTO = null;
+        if(accnumber == null || accnumber.isEmpty()){
+            return userDTO;
+        }
+        
+        //connect to the database
+        try{
+            this.database.openConnection();
+            userDTO = this.database.getUserByAccountNumber(accnumber);
+        } finally{
+            this.database.closeConnection();
+        }
+        return userDTO;
     }
     
     

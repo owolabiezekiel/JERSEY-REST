@@ -19,7 +19,7 @@ public class TransactionDTO implements Serializable{
     private String fromAccount;
     private String toAccount;
     private Double transactionAmount;
-    private String userID;
+    //private String userID;
 
 
     /**
@@ -80,19 +80,19 @@ public class TransactionDTO implements Serializable{
 
     /**
      * @return the userID
-     */
+     
     public String getUserID() {
         return userID;
     }
 
     /**
      * @param userID the userID to set
-     */
+     
     public void setUserID(String userID) {
         this.userID = userID;
     }
     
-    
+    */
     
     
 }
